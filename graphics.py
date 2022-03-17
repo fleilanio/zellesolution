@@ -1,24 +1,24 @@
 # graphics.py
-"""Simple object oriented graphics library  
+# tradução da documentação por zellepython.wordpress.com
+"""Biblioteca gráfica simples orientada a objetos
 
-The library is designed to make it very easy for novice programmers to
-experiment with computer graphics in an object oriented fashion. It is
-written by John Zelle for use with the book "Python Programming: An
-Introduction to Computer Science" (Franklin, Beedle & Associates).
+A biblioteca foi projetada para tornar muito fácil para programadores iniciantes
+a experiência com computação gráfica de forma orientada a objetos. Ela é
+escrita por John Zelle para uso com o livro "Python Programming: An
+Introdução à Ciência da Computação" (Franklin, Beedle & Associates).
 
-LICENSE: This is open-source software released under the terms of the
+LICENÇA: Este é um software de código aberto lançado sob os termos da
 GPL (http://www.gnu.org/licenses/gpl.html).
 
-PLATFORMS: The package is a wrapper around Tkinter and should run on
-any platform where Tkinter is available.
+PLATAFORMAS: O pacote é um wrapper em torno do Tkinter e deve ser executado em
+qualquer plataforma onde o Tkinter esteja disponível.
 
-INSTALLATION: Put this file somewhere where Python can see it.
+INSTALAÇÃO: Coloque este arquivo em algum lugar onde o Python possa lê-lo.
 
-OVERVIEW: There are two kinds of objects in the library. The GraphWin
-class implements a window where drawing can be done and various
-GraphicsObjects are provided that can be drawn into a GraphWin. As a
-simple example, here is a complete program to draw a circle of radius
-10 centered in a 100x100 window:
+VISÃO GERAL: Existem dois tipos de objetos na biblioteca. A classe GraphWin que  implementa uma janela onde o desenho pode ser feito e vários
+GraphicsObjects são fornecidos que podem ser desenhados em um GraphWin. Como um
+exemplo simples, aqui está um programa completo para desenhar um círculo de raio
+10 centralizado em uma janela de 100 x 100:
 
 --------------------------------------------------------------------
 from graphics import *
@@ -32,10 +32,10 @@ def main():
 
 main()
 --------------------------------------------------------------------
-GraphWin objects support coordinate transformation through the
-setCoords method and mouse and keyboard interaction methods.
+Os objetos GraphWin suportam a transformação de coordenadas por meio do
+método setCoords e métodos de interação de mouse e teclado.
 
-The library provides the following graphical objects:
+A biblioteca fornece os seguintes objetos gráficos:
     Point
     Line
     Circle
@@ -46,123 +46,28 @@ The library provides the following graphical objects:
     Entry (for text-based input)
     Image
 
-Various attributes of graphical objects can be set such as
-outline-color, fill-color and line-width. Graphical objects also
-support moving and hiding for animation effects.
+Vários atributos de objetos gráficos podem ser definidos, como
+cor de contorno, cor de preenchimento e largura de linha. Objetos gráficos também
+suporte mover e ocultar para efeitos de animação.
 
-The library also provides a very simple class for pixel-based image
-manipulation, Pixmap. A pixmap can be loaded from a file and displayed
-using an Image object. Both getPixel and setPixel methods are provided
-for manipulating the image.
+A biblioteca também fornece uma classe muito simples para imagens baseadas em manipulação de pixels, Pixmap. Um pixmap pode ser carregado de um arquivo e exibido
+usando um objeto Image. Ambos os métodos getPixel e setPixel são fornecidos
+para manipular a imagem.
 
-DOCUMENTATION: For complete documentation, see Chapter 4 of "Python
-Programming: An Introduction to Computer Science" by John Zelle,
-published by Franklin, Beedle & Associates.  Also see
-http://mcsp.wartburg.edu/zelle/python for a quick reference"""
+Para obter a documentação completa, consulte o Capítulo 4 de "Python
+Programação: Uma Introdução à Ciência da Computação" por John Zelle,
+publicado por Franklin, Beedle & Associates.  Veja também
+http://mcsp.wartburg.edu/zelle/python para uma referência rápida"""
 
 __version__ = "5.0"
 
 # Version 5
-#     * update at bottom to fix MacOS issue causing askopenfile() to hang
-#     * update takes an optional parameter specifying update rate
-#     * Entry objects get focus when drawn
-#     * __repr_ for all objects
-#     * fixed offset problem in window, made canvas borderless
+# Para lista complera de updates visite: https://mcsp.wartburg.edu/zelle/python/graphics.py
 
-# Version 4.3 4/25/2014
-#     * Fixed Image getPixel to work with Python 3.4, TK 8.6 (tuple type handling)
-#     * Added interactive keyboard input (getKey and checkKey) to GraphWin
-#     * Modified setCoords to cause redraw of current objects, thus
-#       changing the view. This supports scrolling around via setCoords.
-#
-# Version 4.2 5/26/2011
-#     * Modified Image to allow multiple undraws like other GraphicsObjects
-# Version 4.1 12/29/2009
-#     * Merged Pixmap and Image class. Old Pixmap removed, use Image.
-# Version 4.0.1 10/08/2009
-#     * Modified the autoflush on GraphWin to default to True
-#     * Autoflush check on close, setBackground
-#     * Fixed getMouse to flush pending clicks at entry
-# Version 4.0 08/2009
-#     * Reverted to non-threaded version. The advantages (robustness,
-#         efficiency, ability to use with other Tk code, etc.) outweigh
-#         the disadvantage that interactive use with IDLE is slightly more
-#         cumbersome.
-#     * Modified to run in either Python 2.x or 3.x (same file).
-#     * Added Image.getPixmap()
-#     * Added update() -- stand alone function to cause any pending
-#           graphics changes to display.
-#
-# Version 3.4 10/16/07
-#     Fixed GraphicsError to avoid "exploded" error messages.
-# Version 3.3 8/8/06
-#     Added checkMouse method to GraphWin
-# Version 3.2.3
-#     Fixed error in Polygon init spotted by Andrew Harrington
-#     Fixed improper threading in Image constructor
-# Version 3.2.2 5/30/05
-#     Cleaned up handling of exceptions in Tk thread. The graphics package
-#     now raises an exception if attempt is made to communicate with
-#     a dead Tk thread.
-# Version 3.2.1 5/22/05
-#     Added shutdown function for tk thread to eliminate race-condition
-#        error "chatter" when main thread terminates
-#     Renamed various private globals with _
-# Version 3.2 5/4/05
-#     Added Pixmap object for simple image manipulation.
-# Version 3.1 4/13/05
-#     Improved the Tk thread communication so that most Tk calls
-#        do not have to wait for synchonization with the Tk thread.
-#        (see _tkCall and _tkExec)
-# Version 3.0 12/30/04
-#     Implemented Tk event loop in separate thread. Should now work
-#        interactively with IDLE. Undocumented autoflush feature is
-#        no longer necessary. Its default is now False (off). It may
-#        be removed in a future version.
-#     Better handling of errors regarding operations on windows that
-#       have been closed.
-#     Addition of an isClosed method to GraphWindow class.
-
-# Version 2.2 8/26/04
-#     Fixed cloning bug reported by Joseph Oldham.
-#     Now implements deep copy of config info.
-# Version 2.1 1/15/04
-#     Added autoflush option to GraphWin. When True (default) updates on
-#        the window are done after each action. This makes some graphics
-#        intensive programs sluggish. Turning off autoflush causes updates
-#        to happen during idle periods or when flush is called.
-# Version 2.0
-#     Updated Documentation
-#     Made Polygon accept a list of Points in constructor
-#     Made all drawing functions call TK update for easier animations
-#          and to make the overall package work better with
-#          Python 2.3 and IDLE 1.0 under Windows (still some issues).
-#     Removed vestigial turtle graphics.
-#     Added ability to configure font for Entry objects (analogous to Text)
-#     Added setTextColor for Text as an alias of setFill
-#     Changed to class-style exceptions
-#     Fixed cloning of Text objects
-
-# Version 1.6
-#     Fixed Entry so StringVar uses _root as master, solves weird
-#            interaction with shell in Idle
-#     Fixed bug in setCoords. X and Y coordinates can increase in
-#           "non-intuitive" direction.
-#     Tweaked wm_protocol so window is not resizable and kill box closes.
-
-# Version 1.5
-#     Fixed bug in Entry. Can now define entry before creating a
-#     GraphWin. All GraphWins are now toplevel windows and share
-#     a fixed root (called _root).
-
-# Version 1.4
-#     Fixed Garbage collection of Tkinter images bug.
-#     Added ability to set text atttributes.
-#     Added Entry boxes.
 
 import time, os, sys
 
-try:  # import as appropriate for 2.x vs. 3.x
+try:  # import import apropriado para 2.x vs. 3.x
    import tkinter as tk
 except:
    import Tkinter as tk
@@ -172,7 +77,7 @@ except:
 # Module Exceptions
 
 class GraphicsError(Exception):
-    """Generic error class for graphics module exceptions."""
+    """Classe de erro genérica para exceções do módulo gráfico."""
     pass
 
 OBJ_ALREADY_DRAWN = "Object currently drawn"
@@ -180,7 +85,7 @@ UNSUPPORTED_METHOD = "Object doesn't support operation"
 BAD_OPTION = "Illegal option value"
 
 ##########################################################################
-# global variables and funtions
+# Variáveis globais e funções
 
 _root = tk.Tk()
 _root.withdraw()
@@ -201,11 +106,11 @@ def update(rate=None):
     _root.update()
 
 ############################################################################
-# Graphics classes start here
+# As classes Graphics começam aqui
         
 class GraphWin(tk.Canvas):
 
-    """A GraphWin is a toplevel window for displaying graphics."""
+    """Um GraphWin é uma janela de nível superior para exibir gráficos."""
 
     def __init__(self, title="Graphics Window",
                  width=200, height=200, autoflush=True):
@@ -253,19 +158,19 @@ class GraphWin(tk.Canvas):
 
 
     def setBackground(self, color):
-        """Set background color of the window"""
+        """Definir a cor de fundo da janela"""
         self.__checkOpen()
         self.config(bg=color)
         self.__autoflush()
         
     def setCoords(self, x1, y1, x2, y2):
-        """Set coordinates of window to run from (x1,y1) in the
-        lower-left corner to (x2,y2) in the upper-right corner."""
+        """Defina as coordenadas da janela a partir de (x1,y1) no
+        canto inferior esquerdo para (x2,y2) no canto superior direito."""
         self.trans = Transform(self.width, self.height, x1, y1, x2, y2)
         self.redraw()
 
     def close(self):
-        """Close the window"""
+        """Fechar a janela"""
 
         if self.closed: return
         self.closed = True
@@ -287,28 +192,28 @@ class GraphWin(tk.Canvas):
 
     
     def plot(self, x, y, color="black"):
-        """Set pixel (x,y) to the given color"""
+        """Defina o pixel (x,y) para a cor fornecida"""
         self.__checkOpen()
         xs,ys = self.toScreen(x,y)
         self.create_line(xs,ys,xs+1,ys, fill=color)
         self.__autoflush()
         
     def plotPixel(self, x, y, color="black"):
-        """Set pixel raw (independent of window coordinates) pixel
-        (x,y) to color"""
+        """Definir pixel bruto (independente das coordenadas da janela) pixel
+        (x,y) para colorir"""
         self.__checkOpen()
         self.create_line(x,y,x+1,y, fill=color)
         self.__autoflush()
       
     def flush(self):
-        """Update drawing to the window"""
+        """Atualizar desenho para a janela"""
         self.__checkOpen()
         self.update_idletasks()
         
     def getMouse(self):
-        """Wait for mouse click and return Point object representing
-        the click"""
-        self.update()      # flush any prior clicks
+        """Aguarde o clique do mouse e retorne o objeto Point representando
+        o clique"""
+        self.update()      # liberar todos os cliques anteriores
         self.mouseX = None
         self.mouseY = None
         while self.mouseX == None or self.mouseY == None:
@@ -321,8 +226,8 @@ class GraphWin(tk.Canvas):
         return Point(x,y)
 
     def checkMouse(self):
-        """Return last mouse click or None if mouse has
-        not been clicked since last call"""
+        """Retorna o último clique do mouse ou Nenhum se o mouse não tiver sido 
+            clicado desde a última chamada"""
         if self.isClosed():
             raise GraphicsError("checkMouse in closed window")
         self.update()
@@ -335,7 +240,7 @@ class GraphWin(tk.Canvas):
             return None
 
     def getKey(self):
-        """Wait for user to press a key and return it as a string."""
+        """Aguarde o usuário pressionar uma tecla e devolvê-la como uma string."""
         self.lastKey = ""
         while self.lastKey == "":
             self.update()
@@ -347,7 +252,8 @@ class GraphWin(tk.Canvas):
         return key
 
     def checkKey(self):
-        """Return last key pressed or None if no key pressed since last call"""
+        """Retorna a última tecla pressionada ou Nenhum se nenhuma 
+            tecla for pressionada desde a última chamada"""
         if self.isClosed():
             raise GraphicsError("checkKey in closed window")
         self.update()
@@ -356,11 +262,11 @@ class GraphWin(tk.Canvas):
         return key
             
     def getHeight(self):
-        """Return the height of the window"""
+        """Retornar a altura da janela"""
         return self.height
         
     def getWidth(self):
-        """Return the width of the window"""
+        """Retorna a largura da janela"""
         return self.width
     
     def toScreen(self, x, y):
@@ -401,7 +307,7 @@ class GraphWin(tk.Canvas):
                       
 class Transform:
 
-    """Internal class for 2-D coordinate transformations"""
+    """Classe interna para transformações de coordenadas 2D"""
     
     def __init__(self, w, h, xlow, ylow, xhigh, yhigh):
         # w, h are width and height of window
@@ -415,20 +321,20 @@ class Transform:
         self.yscale = yspan/float(h-1)
         
     def screen(self,x,y):
-        # Returns x,y in screen (actually window) coordinates
+        # Retorna coordenadas x,y na tela (janela atual)
         xs = (x-self.xbase) / self.xscale
         ys = (self.ybase-y) / self.yscale
         return int(xs+0.5),int(ys+0.5)
         
     def world(self,xs,ys):
-        # Returns xs,ys in world coordinates
+        # Retorna xs,ys em coordenadas mundo
         x = xs*self.xscale + self.xbase
         y = self.ybase - ys*self.yscale
         return x,y
 
 
-# Default values for various item configuration options. Only a subset of
-#   keys may be present in the configuration dictionary for a given item
+# Valores padrão para várias opções de configuração de itens. Apenas um subconjunto da
+#  chaves podem estar presentes no dicionário de configuração para um determinado item
 DEFAULT_CONFIG = {"fill":"",
       "outline":"black",
       "width":"1",
